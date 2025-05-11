@@ -1,0 +1,20 @@
+# backend/fly.toml
+app = "rabbitt" # <-- REMPLACEZ par le nom exact choisi sur le dashboard Fly.io
+primary_region = "cdg"     # <-- REMPLACEZ par la région choisie (ex: ams, lhr, etc.)
+kill_signal = "SIGINT"
+kill_timeout = "5s"
+
+# Pas de section [build] ici, car nous utilisons des buildpacks (détectés via Procfile/requirements.txt)
+
+[http_service]
+  internal_port = 8080 # Le buildpack Python utilisera $PORT, Fly le mappe ici par défaut.
+  force_https = true
+  auto_stop_machines = true
+  auto_start_machines = true
+  min_machines_running = 0 # Mettre à 1 pour garder l'app active (peut coûter plus cher)
+  processes = ["app"]      # Fait référence à 'web' dans votre backend/Procfile
+
+[[vm]]
+  cpu_kind = "shared"
+  cpus = 1
+  memory_mb = 256 # Ajustez si nécessaire
