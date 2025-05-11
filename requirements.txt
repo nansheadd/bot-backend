@@ -1,0 +1,8 @@
+# backend/requirements.txt
+fastapi
+uvicorn[standard]
+python-multipart
+google-generativeai
+python-dotenv # Pour charger .env localement
+Jinja2 # Si vous décidez de servir l'index.html de React depuis FastAPI
+aiofiles # Pour servir des fichiers statiques
